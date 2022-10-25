@@ -13,7 +13,7 @@ steps:
   id: Push
   args:
   - 'push'
-  - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nnodejs-cloudbuild-deploy:$SHORT_SHA'
+  - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:$SHORT_SHA'
 
 #[END cloudbuild]
 
