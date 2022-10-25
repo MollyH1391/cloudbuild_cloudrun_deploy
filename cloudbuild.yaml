@@ -8,8 +8,13 @@ steps:
   - '-t'
   - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:$SHORT_SHA'
   - '.'
-# images:
-# - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:$SHORT_SHA'
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+  - 'push'
+  - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nnodejs-cloudbuild-deploy:$SHORT_SHA'
+
 #[END cloudbuild]
 
 # [START cloudrun]
