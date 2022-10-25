@@ -18,9 +18,17 @@ steps:
 #[END cloudbuild]
 
 # [START cloudrun]
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   args:
-#   - 'run'
-#   - 'deploy'
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'cloudrunservice'
+  - '--image'
+  - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:$SHORT_SHA'
+  - '--region'
+  - 'asia-east1'
+  - '--platform'
+  - 'managded'
+  - '--allow-unauthenticated'
 
 # [END cloudrun]
