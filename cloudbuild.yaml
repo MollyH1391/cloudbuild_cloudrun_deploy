@@ -1,0 +1,64 @@
+steps:
+# [START cloudbuild]
+# This step builds the container image.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Build
+  args:
+  - 'build'
+  - '-t'
+  - 'asia-east1-docker.pkg.dev/$PROJECT_ID/my-repository/nodejs-cloudbuild:$SHORT_SHA'
+  - '.'
+
+# This step pushes the image to Artifact Registry
+# The PROJECT_ID and SHORT_SHA variables are automatically
+# replaced by Cloud Build.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+  - 'push'
+  - 'asia-east1-docker.pkg.dev/$PROJECT_ID/my-repository/nodejs-cloudbuild:$SHORT_SHA'
+#[END cloudbuild]
+
+#skaffold 
+- name: gcr.io/k8s-skaffold/skaffold:latest
+  id: skaffold deploy
+  env: 
+  - 'CLOUDSDK_COMPUTE_ZONE=asia-east1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=nodejs-cloudbuild'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud container clusters get-credentials nodejs-cloudbuild --region asia-east1 --project wingwill-demo-lab-molly
+      if [ "$BRANCH_NAME" == "main" ]
+      gcloud auth configure-docker asia-east1-docker.pkg.dev
+      then
+        skaffold run
+      fi
+
+
+
+# [START cloudbuild-trigger-cd]
+# This step clones the nodejs-cloudbuild-ENV repository
+# - name: 'gcr.io/cloud-builders/git'
+#   id: Clone env repository
+#   entrypoint: /bin/sh
+#   args:
+#   - '-c'
+#   - |
+#     git clone https://github.com/MollyH1391/nodejs_cloudbuild_ENV.git \
+#     cd nodejs_cloudbuild_ENV && \
+
+# This step generates the new manifest
+# - name: 'gcr.io/cloud-builders/git'
+#   id: Generate manifest
+#   entrypoint: /bin/sh
+#   args:
+#   - '-c'
+#   - |
+#     cp -f kubernetes.yaml.tpl kubernetes.yaml 
+#     git commit -m "deploy image of nodejs_cloudbuild"
+#     git push origin production
+
+# [END cloudbuild-trigger-cd]
+

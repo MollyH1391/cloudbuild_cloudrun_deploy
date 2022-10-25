@@ -1,0 +1,18 @@
+# To learn more about the skaffold.yaml schema visit
+# https://skaffold.dev/docs/references/yaml/
+apiVersion: skaffold/v2beta19
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+  - context: .
+    image: asia-east1-docker.pkg.dev/wingwill-demo-lab-molly/my-repository/nodejs-cloudbuild
+deploy:
+  kubectl:
+    manifests:
+    - kubernetes-manifests/**
+profiles:
+- name: cloudbuild
+  build:
+    googleCloudBuild: {}
