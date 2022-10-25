@@ -6,11 +6,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodejs-cloudbuild-external
+  name: nodejs-cloudbuild-deploy-external
 spec:
   type: LoadBalancer
   selector:
-    app: nodejs-cloudbuild
+    app: nodejs-cloudbuild-deploy
   ports:
   - name: http
     port: 81
