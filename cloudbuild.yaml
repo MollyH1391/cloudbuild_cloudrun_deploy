@@ -6,10 +6,10 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:$SHORT_SHA'
+  - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:tag1'
   - '.'
 images:
-- 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:$SHORT_SHA'
+- 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:tag1'
 # This step pushes the image to Artifact Registry
 # The PROJECT_ID and SHORT_SHA variables are automatically
 # replaced by Cloud Build.
