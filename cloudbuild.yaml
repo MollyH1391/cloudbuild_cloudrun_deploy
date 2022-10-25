@@ -19,6 +19,7 @@ steps:
 
 # [START cloudrun]
 - name: 'gcr.io/cloud-builders/gcloud'
+  id: Coudrun Deploy 
   args:
   - 'run'
   - 'deploy'
@@ -28,7 +29,7 @@ steps:
   - '--region'
   - 'asia-east1'
   - '--platform'
-  - 'managded'
+  - 'managed'
   - '--allow-unauthenticated'
 
 # [END cloudrun]
