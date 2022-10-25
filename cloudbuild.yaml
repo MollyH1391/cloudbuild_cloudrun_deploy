@@ -8,14 +8,14 @@ steps:
   - '-t'
   - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:$SHORT_SHA'
   - '.'
-images:
-- 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:$SHORT_SHA'
-# This step pushes the image to Artifact Registry
-# The PROJECT_ID and SHORT_SHA variables are automatically
-# replaced by Cloud Build.
-# - name: 'gcr.io/cloud-builders/docker'
-#   id: Push
-#   args:
-#   - 'push'
-#   - 'asia-east1-docker.pkg.dev/$PROJECT_ID/my-repository/nodejs-cloudbuild-deploy:$SHORT_SHA'
+# images:
+# - 'asia-east1-docker.pkg.dev/$PROJECT_ID/cloudrun-deploy/nodejs-cloudbuild-deploy:$SHORT_SHA'
 #[END cloudbuild]
+
+# [START cloudrun]
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   args:
+#   - 'run'
+#   - 'deploy'
+
+# [END cloudrun]
